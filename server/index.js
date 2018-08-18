@@ -21,8 +21,8 @@ app.get('/api/users', (req, res) => {
     })
 })
 
-app.get('/api/user', (req, res) => {
-    app.get('db').getUserProfile(id).then(response => {
+app.get('/api/user/:username', (req, res) => {
+    app.get('db').getUserProfile({username: req.params.username}).then(response => {
         return res.status(200).send(response)
     })
 })

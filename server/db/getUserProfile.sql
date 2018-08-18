@@ -1,5 +1,25 @@
-select firstname, lastname, username, profilepicture, about from users 
+select firstname, lastname, username, profilepicture, A.about, COALESCE(images.gallery, '[]') AS Gallery from users U
 
-left join about as a on users.id = a.artistid
+JOIN (
+    SELECT
+      S.artistid,
+      json_agg(
+        (
+          SELECT
+            x
+          FROM(
+              SELECT
+                S.url,
+                S.description
+            ) x
+        )
+      ) AS gallery
+    FROM
+      images S
+    GROUP BY
+      S.artistid
+  ) AS images ON images.artistid = U.id 
 
-where users.id = ${id}
+  JOIN about AS A on U.id = A.artistid
+  
+  WHERE U.username = ${username}
