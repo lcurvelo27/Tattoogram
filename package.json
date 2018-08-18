@@ -1,0 +1,24 @@
+{
+  "name": "tattoogram",
+  "version": "1.0.0",
+  "description": "Personal Project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcurvelo27/Tattoogram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lcurvelo27/Tattoogram/issues"
+  },
+  "homepage": "https://github.com/lcurvelo27/Tattoogram#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  }
+}
