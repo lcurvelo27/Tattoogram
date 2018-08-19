@@ -27,6 +27,18 @@ app.get('/api/user/:username', (req, res) => {
     })
 })
 
+app.get('/api/images/:username', (req, res) => {
+    app.get('db').getUserImages({username: req.params.username}).then(response => {
+        return res.status(200).send(response)
+    })
+})
+
+app.get('/api/work/:username', (req, res) => {
+    app.get('db').getUserWorkInfo({username: req.params.username}).then(response => {
+        return res.status(200).send(response)
+    })
+})
+
 
 
 app.listen(3005, () => console.log('listening on port 3005'))

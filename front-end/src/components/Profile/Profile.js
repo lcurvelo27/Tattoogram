@@ -5,8 +5,9 @@ import users from '../FakeDb/mock-data'
 import about from '../FakeDb/mock-data-about'
 import images from '../FakeDb/mock-image-data'
 import Gallery from 'react-grid-gallery'
+import axios from 'axios'
+import { getUserAll } from '../../utils/api'
 const { navigationProfile, navigationButtons, navigationContainer, imageGrid , wrapper, container, contentContainer, contentBox, navigationBar } = style
-let user = []
   
 
 class Profile extends Component { 
@@ -14,24 +15,29 @@ class Profile extends Component {
         super(props)
 
         this.state = {
+            user: null,
             selected: 'About',
-            gallery: []
+            gallery: [],
+            workInfo: null
         }
     }
 
     componentDidMount() {
-        let galleryImages = []
-        images.map(image =>{
-            galleryImages.push({
-                src: image.url,
-                thumbnail: image.url,
-                thumbnailWidth: 300,
-                thumbnailHeight: 300
+        let username = this.props.match.params.username
+        getUserAll(username).then(response => {
+            let galleryImages = response.images.map(image => {
+                return {
+                        src: image.url,
+                        thumbnail: image.url,
+                        thumbnailWidth: 300,
+                        thumbnailHeight: 300
+                }
             })
-        })
-
-        this.setState({
-            gallery: galleryImages
+            this.setState({
+                user: response.info[0],
+                gallery: galleryImages,
+                workInfo: response.work[0]
+            }, () => console.log(this.state))
         })
     }
     
@@ -43,18 +49,17 @@ class Profile extends Component {
     
 
     render() {
-
-        user = users.filter(user => {
-            return user.username === this.props.match.params.username
-        })
-
+    
         return(
             <div style = {wrapper}>
                 <Navbar />
+
+                {
+                this.state.user ? 
                 <div style = {container}>
                     <div style={navigationContainer}>
                         <div style={navigationProfile}>
-                            <img src={user[0].profileImage ? user[0].profileImage 
+                            <img src={ this.state.user.profilepicture ? this.state.user.profilepicture 
                                 : 
                                 require('../Images/default-user-image.png')} 
                                 alt="profile image" 
@@ -62,9 +67,9 @@ class Profile extends Component {
                                 width="100"
                                 style={{borderRadius: '100%'}}
                                 />
-                                <p>{user[0].username}</p>
-                                <p>{user[0].first_name}</p>
-                                <p>{user[0].last_name}</p>
+                                <p>Username: {this.state.user.username}</p>
+                                <p>First Name: {this.state.user.firstname}</p>
+                                <p>Last Name: {this.state.user.lastname}</p>
                             </div>
                             <div style={navigationButtons}>
                                 <p onClick={() => this.updateContent('About')}>About</p>
@@ -77,7 +82,7 @@ class Profile extends Component {
                             { 
                                 this.state.selected == 'About' &&
                                 <div style={contentBox}>
-                                    {about[0].about} 
+                                    {this.state.workInfo.about} 
                                 </div>
                             }
                             { 
@@ -89,7 +94,7 @@ class Profile extends Component {
                             { 
                                 this.state.selected == 'Contact' &&
                                 <div style={{...contentBox, flexDirection: 'column', justifyContent: 'center'}}>
-                                    <p>Email Address: {user[0].email}</p>
+                                    <p>Email Address: Email</p>
                                     <p>Phone Number: +1 801-830-2972</p>
                                     <p>Address: 1882 ashley valley lane, Sandy. UT</p>
                                     <img src='https://maps.googleapis.com/maps/api/staticmap?center=Sandy,UT&markers=size:mid|1882+ashley+valley+lane,sandy,ut&zoom=15&size=300x300&key=AIzaSyCSLFENvVixOGW_2gx7JyWKdOKf2ToBxhw' alt=""/>
@@ -98,6 +103,9 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+                :
+                <p>Loading</p>
+                }
             </div>
         )
     }
