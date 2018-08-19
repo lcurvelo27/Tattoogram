@@ -37,7 +37,7 @@ class Profile extends Component {
                 user: response.info[0],
                 gallery: galleryImages,
                 workInfo: response.work[0]
-            }, () => console.log(this.state))
+            })
         })
     }
     
