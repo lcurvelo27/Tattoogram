@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { getImageView } from '../../utils/api'
+import { getUserById } from '../../utils/api'
+import style from './ImageViewStyle'
+const { iconStyle, container, contentContainer, artistContainer } = style
 
 
 class ImageView extends Component{
@@ -9,23 +11,24 @@ class ImageView extends Component{
     }
 
     componentDidMount() {
-        getImageView(this.state.image.artistid).then(response => {
+        getUserById(this.state.image.artistid).then(response => {
             this.setState({
                 artist: response[0]
             })
         })
     }
+
     
     render(){
 
     return(
-            <div>
+            <div style={container}>
                 { 
                 this.state.artist ?
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} >
+                <div style={contentContainer} >
                     <img src={this.state.image.url} alt='image' height='500'/>
                     <p>{this.state.image.description}</p>
-                    <div style={{display:'flex', width: '100%', justifyContent: 'flex-start'}}>
+                    <div style={artistContainer}>
                         <img src={this.state.artist.profilepicture} alt="Profile Image" height="50" style={{borderRadius: '100%'}}/>
                         <p>Artist: <a href={`http://localhost:3000/#/profile/${this.state.artist.username}`}>{this.state.artist.firstname} {this.state.artist.lastname}</a></p> 
                     </div>
