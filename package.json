@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/lcurvelo27/Tattoogram#readme",
   "dependencies": {
+    "@material-ui/core": "^1.5.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "radium": "^0.24.1"
   }
 }

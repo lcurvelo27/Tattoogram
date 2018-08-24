@@ -3,14 +3,16 @@ import users from '../FakeDb/mock-data'
 import Navbar from '../Navbar/Navbar'
 import style from './EditStyle'
 import images from '../FakeDb/mock-image-data'
+import axios from 'axios'
+import { getUserAllByID, updateUserInfo, updateWorkInfo } from '../../utils/api';
 
 const { buttonsContainer, galleryContainer, inputContainer, container, menuContainer, navigationMenu, contentContainer } = style
 
-const Buttons = () =>{
+const Buttons = (props) =>{
     return(
         <div style={buttonsContainer}>
-            <button>Save</button>
-            <button>Cancel</button>
+            <button onClick={() => props.saveInfo()}>Save</button>
+            <button onClick={() => props.reset()}>Cancel</button>
         </div>
     )
 }
@@ -26,16 +28,23 @@ const Input = (props) => {
 
 class PersonalInfoEdit extends Component {
     state = {
-        name: this.props.name,
-        lastName: this.props.lastName,
+        firstname: this.props.firstname,
+        lastname: this.props.lastname,
         username: this.props.username,
-        profilePic: this.props.profilePic
+        profilepicture: this.props.profilepicture
     }
 
     updateInput = (state, value) => {
         this.setState(
             {[state]: value}
         )
+    }
+
+    saveInfo = () => {
+        updateUserInfo({...this.state}).then(response => {
+            let updatedUser = response.data[0]
+            this.setState({updatedUser}, () => console.log(this.state))
+        })
     }
 
     render() {
@@ -43,13 +52,13 @@ class PersonalInfoEdit extends Component {
             <div style = {container}>
                 <h3>Personal Info</h3>
                 <div style = {{...container, height: '50%'}}>
-                    <Input state={'name'} value={this.state.name} updateInput={this.updateInput}>Name: </Input>
-                    <Input state={'lastName'} value={this.state.lastName} updateInput={this.updateInput}>Last Name: </Input>
+                    <Input state={'firstname'} value={this.state.firstname} updateInput={this.updateInput}>Name: </Input>
+                    <Input state={'lastname'} value={this.state.lastname} updateInput={this.updateInput}>Last Name: </Input>
                     <Input state={'username'} value={this.state.username} updateInput={this.updateInput}>Username: </Input>
-                    <Input state={'profilePic'} value={this.state.profilePic} updateInput={this.updateInput}>Profile Picture Url: </Input>
-                    <img src={this.state.profilePic} alt='profile picture' height= '100' style={{borderRadius: '100%'}}/>
+                    <Input state={'profilepicture'} value={this.state.profilepicture} updateInput={this.updateInput}>Profile Picture Url: </Input>
+                    <img src={this.state.profilepicture} alt='profile picture' height= '100' style={{borderRadius: '100%'}}/>
                 </div>
-                <Buttons />
+                <Buttons saveInfo = {this.saveInfo}/>
             </div>
         )
     }
@@ -57,8 +66,8 @@ class PersonalInfoEdit extends Component {
 
 class WorkInfoEdit extends Component {
     state = {  
-        experience: '',
-        location: ''
+        location: this.props.workInfo.location,
+        about: this.props.workInfo.about
     }
 
     updateInput = (state, value) => {
@@ -67,15 +76,22 @@ class WorkInfoEdit extends Component {
         )
     }
 
+    saveInfo = () => {
+        updateWorkInfo({...this.state}).then(response => {
+            let newState = response.data[0]
+            this.setState(newState)
+        })
+    }
+
     render() {
         return(
             <div style={container}>
                 <h3>Work Info</h3>
                 <div style={{...container, height: '50%'}}>
-                    <Input state={'experience'} value={this.state.experience} updateInput={this.updateInput}>Experience: </Input>
+                    <Input state={'about'} value={this.state.about} updateInput={this.updateInput}>About: </Input>
                     <Input state={'location'} value={this.state.location} updateInput={this.updateInput}>Location Address: </Input>
                 </div>
-                <Buttons />
+                <Buttons saveInfo={this.saveInfo}/>
             </div>
         )
     }
@@ -94,11 +110,15 @@ class GalleryEdit extends Component {
         )
     }
 
+    saveInfo = () => {
+        
+    }
+
     render() {
         let gallery = this.state.images.map((image, i) => {
             return(
                 <div style={{padding: '5px'}}key={i}>
-                    <img src={image} alt={image.url} height='120'/>
+                    <img src={image.url} alt={image.url} height='120'/>
                 </div>
             )
         })
@@ -122,18 +142,23 @@ class GalleryEdit extends Component {
 
 class Edit extends Component {
     state = {
-        user: users[0],
+        user: '',
         images: [],
+        workInfo: '',
         editSelected: 'Personal Info'
     }
     
     componentDidMount() {
-        let imagesGallery = []
-        images.map(image => {
-            return imagesGallery.push(image.url)
-        })
-        this.setState({
-            images: imagesGallery
+        getUserAllByID(1).then(response => {
+            let newImagesState = response.images
+            let newUserState = response.user[0]
+            let newWorkInfo = response.work[0]
+
+            this.setState({
+                images: newImagesState,
+                user: newUserState,
+                workInfo: newWorkInfo
+            }, () => console.log(this.state))
         })
     }
 
@@ -155,25 +180,33 @@ class Edit extends Component {
                         <p onClick ={() => this.handleMenuClick('Gallery')}>Gallery</p>
                     </div>
                     <div style = { contentContainer }>
+                    { this.state.user ? 
+                    <div>
                         { 
                         this.state.editSelected == 'Personal Info' &&
                         <PersonalInfoEdit 
-                            name = {this.state.user.first_name}
-                            lastName = {this.state.user.last_name}
+                            firstname = {this.state.user.firstname}
+                            lastname = {this.state.user.lastname}
                             username = {this.state.user.username}
-                            profilePic = {this.state.user.profileImage}
+                            profilepicture = {this.state.user.profilepicture}
                         />
                         }
                         
                         { 
                         this.state.editSelected == 'Work Info' &&
-                        <WorkInfoEdit />
+                        <WorkInfoEdit 
+                            workInfo = {this.state.workInfo}
+                        />
                         }
                         
                         { 
                         this.state.editSelected == 'Gallery' &&
                         <GalleryEdit images={this.state.images}/>
                         }
+                        </div>
+                        :
+                        <p>Loading</p>
+                    }
                     </div>
                 </div>
             </div>
