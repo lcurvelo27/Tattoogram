@@ -29,8 +29,7 @@ class ImageView extends Component{
                     <img src={this.state.image.url} alt='image' height='500'/>
                     <p>{this.state.image.description}</p>
                     <div style={artistContainer}>
-                        <img src={this.state.artist.profilepicture} alt="Profile Image" height="50" style={{borderRadius: '100%'}}/>
-                        <p>Artist: <a href={`http://localhost:3000/#/profile/${this.state.artist.username}`}>{this.state.artist.firstname} {this.state.artist.lastname}</a></p> 
+                        <p>By: <a href={`http://localhost:3000/#/profile/${this.state.artist.username}`} style={{textDecoration: 'none', color: 'black'}}>{this.state.artist.firstname} {this.state.artist.lastname}</a></p> 
                     </div>
                 </div>
                 :

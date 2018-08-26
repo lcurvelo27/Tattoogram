@@ -1,3 +1,5 @@
+// PROFILE STYLE
+
 const wrapper = {
     width: '100%',
     display: 'flex',
@@ -8,28 +10,33 @@ const container = {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh'
+    height: '100%'
 }
 
 const contentContainer = {
     width: '70%',
-    border: '1px solid blue',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'poppins',
+    overflow: 'auto'
 }
 
 const navigationContainer = {
     width: '30%',
-    height: '100%',
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '40px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    fontFamily: 'poppins',
+    position: 'sticky',
+    top: 0,
+    backgroundColor: '#F7F7F7'
 }
 
 const navigationButtons = {
@@ -43,7 +50,6 @@ const contentBox = {
     display: 'flex',
     alignItems: 'center',
     width: '70%',
-    border: '1px solid red',
     height: '100%'
 }
 
@@ -55,7 +61,9 @@ const navigationProfile = {
 }
 
 const imageGrid = {
-    width: '90%',
+    width: 'inherit',
+    padding: '50px',
+    height: '50vh',
     overflow: 'auto'
 }
 
