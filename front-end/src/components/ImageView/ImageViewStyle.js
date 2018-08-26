@@ -16,8 +16,10 @@ const container = {
 
 const artistContainer = {
     display:'flex', 
-    width: '100%', 
-    justifyContent: 'flex-start'
+    width: '50%', 
+    justifyContent: 'space-around',
+    fontFamily: 'poppins',
+    letterSpacing: '2px'
 }
 
 module.exports = {

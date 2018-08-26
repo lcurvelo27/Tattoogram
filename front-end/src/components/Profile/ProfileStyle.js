@@ -1,3 +1,5 @@
+// PROFILE STYLE
+
 const wrapper = {
     width: '100%',
     display: 'flex',
@@ -18,7 +20,8 @@ const contentContainer = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontFamily: 'poppins'
 }
 
 const navigationContainer = {
@@ -29,7 +32,8 @@ const navigationContainer = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '40px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    fontFamily: 'poppins'
 }
 
 const navigationButtons = {

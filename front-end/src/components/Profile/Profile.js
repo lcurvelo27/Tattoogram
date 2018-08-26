@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar';
 import style from './ProfileStyle'
-import users from '../FakeDb/mock-data'
-import about from '../FakeDb/mock-data-about'
-import images from '../FakeDb/mock-image-data'
 import Gallery from 'react-grid-gallery'
 import axios from 'axios'
 import { getUserAll } from '../../utils/api'
@@ -16,7 +13,7 @@ class Profile extends Component {
 
         this.state = {
             user: null,
-            selected: 'About',
+            selected: 'Work',
             gallery: [],
             workInfo: null
         }
@@ -53,7 +50,6 @@ class Profile extends Component {
         return(
             <div style = {wrapper}>
                 <Navbar />
-
                 {
                 this.state.user ? 
                 <div style = {container}>
@@ -70,10 +66,10 @@ class Profile extends Component {
                                 <p>Username: {this.state.user.username}</p>
                                 <p>First Name: {this.state.user.firstname}</p>
                                 <p>Last Name: {this.state.user.lastname}</p>
-                            </div>
+                        </div>
                             <div style={navigationButtons}>
-                                <p onClick={() => this.updateContent('About')}>About</p>
                                 <p onClick={() => this.updateContent('Work')}>Work</p>
+                                <p onClick={() => this.updateContent('About')}>About</p>
                                 <p onClick={() => this.updateContent('Contact')}>Contact</p>
                             </div>
                     </div>
