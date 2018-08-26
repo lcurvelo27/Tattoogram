@@ -61,7 +61,7 @@ const navigationProfile = {
 }
 
 const imageGrid = {
-    width: 'inherit',
+    width: '90%',
     padding: '50px',
     height: '50vh',
     overflow: 'auto'

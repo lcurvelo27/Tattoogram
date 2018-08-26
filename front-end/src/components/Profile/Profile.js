@@ -35,8 +35,8 @@ class Profile extends Component {
                 return {
                         src: image.url,
                         thumbnail: image.url,
-                        thumbnailWidth: 300,
-                        thumbnailHeight: 300
+                        thumbnailWidth: 500,
+                        thumbnailHeight: 500                        
                 }
             })
             this.setState({
@@ -99,7 +99,7 @@ class Profile extends Component {
                                     <h2>Portfolio</h2>  
                                 </Element>
                                 <div style={imageGrid}>                                    
-                                    <Gallery images={this.state.gallery}/>
+                                    <Gallery images={this.state.gallery} backdropClosesModal={true} rowHeight={300}/>
                                 </div> 
                                 <Element name='about' style={{marginTop: '100px'}}>
                                     <h2>About</h2>
