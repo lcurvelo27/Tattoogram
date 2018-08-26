@@ -23,7 +23,6 @@ class Profile extends Component {
 
         this.state = {
             user: null,
-            selected: 'Work',
             gallery: [],
             workInfo: null
         }
@@ -61,12 +60,6 @@ class Profile extends Component {
     scrollToTop = () => {
         scroll.scrollToTop();
       }
-    
-    updateContent = (value) => {
-        this.setState({
-            selected: value
-        })
-    }
     
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');

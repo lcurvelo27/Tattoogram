@@ -29,7 +29,7 @@ const navigationContainer = {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: '40px',
     boxSizing: 'border-box',
