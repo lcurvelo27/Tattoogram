@@ -1,19 +1,20 @@
 // PROFILE STYLE
+import { css } from 'emotion'
 
-const wrapper = {
+export const wrapper = css({
     width: '100%',
     display: 'flex',
     flexDirection: 'column'
-}
+})
 
-const container = {
+export const container = css({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     height: '100%'
-}
+})
 
-const contentContainer = {
+export const contentContainer = css({
     width: '70%',
     height: '100%',
     display: 'flex',
@@ -22,63 +23,73 @@ const contentContainer = {
     justifyContent: 'center',
     fontFamily: 'poppins',
     overflow: 'auto'
-}
+})
 
-const navigationContainer = {
+export const navigationContainer = css({
     width: '30%',
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     padding: '40px',
     boxSizing: 'border-box',
     fontFamily: 'poppins',
     position: 'sticky',
     top: 0,
     backgroundColor: '#F7F7F7'
-}
+})
 
-const navigationButtons = {
-    ...navigationContainer,
-    width: '100%',
-    height: '20%',
-    padding: 'none'
-}
+export const navigationButtonsContainer = css({
+    width: '30%',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '400px',
+    textAlign: 'left',
+    fontSize: '1.2rem',
+    marginLeft: '20px',
+    height: '10%',
+    padding: 'none',
+})
 
-const contentBox = {
+export const navigationButtons = css({
+    width: '100px',
+    fontSize: '1rem',
+    textAlign: 'left',
+    backgroundColor: 'inherit',
+    border: 'none',
+    transition: 'all 0.2s ease',
+    ':hover':{
+        color: 'gray',
+        borderLeft: '3px solid black',
+        cursor: 'pointer'
+    },
+    ':focus': {
+        outline: 0,
+        borderLeft: '3px solid black'
+    }
+})
+
+export const contentBox = css({
     display: 'flex',
     alignItems: 'center',
     width: '70%',
     height: '100%'
-}
+})
 
-const navigationProfile = {
+export const navigationProfile = css({
+    textAlign: 'left',
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center'
-}
+})
 
-const imageGrid = {
+export const imageGrid = css({
     width: '90%',
     padding: '50px',
     height: '50vh',
     overflow: 'auto'
-}
+})
 
-const imageStyle = {
+export const imageStyle = css({
     margin: '5px'
-}
+})
 
-module.exports = {
-    navigationProfile: navigationProfile,
-    navigationButtons: navigationButtons,
-    navigationContainer: navigationContainer,
-    imageStyle: imageStyle,
-    imageGrid: imageGrid,
-    wrapper: wrapper,
-    container: container,
-    contentContainer: contentContainer,
-    contentBox: contentBox
-}

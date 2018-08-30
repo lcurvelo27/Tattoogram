@@ -1,29 +1,88 @@
-const searchContainer = {
+import { css } from 'emotion'
+
+export const searchContainer = css({
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
-    width: '80%',
-    marginTop: '100px'
-}
+    justifyContent: 'flex-start',
+    width: '85%',
+    marginTop: '100px',
+    '& a': {
+        textDecoration: 'none',
+        color: 'black'
+    }
+})
 
-const tile = {
+export const tile = css({
     display: 'flex',
-    flexDirection: 'column',
     alignContent: 'center', 
     alignItems:'center', 
-    width: '25%',
-    padding: '20px'
-}
+    width: '100%',
+    padding: '20px',
+    opacity: '0.7',
+    transition: 'opacity 0.2s ease',
+    ':hover' : {
+        opacity: '1'
+    }
+})
 
-const wrapper = {
+export const tileImagesStyle = css({
+    display: 'flex',
+    width: '100%'
+})
+
+export const tileInfo = css({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    textAlign: 'left',
+    marginLeft: '10px',
+    fontFamily: 'poppins',
+    '& p' : {
+        marginTop: '0',        
+        width: '60%',
+        fontSize: '0.8rem'
+    },
+    '& .info': {
+        fontWeight: 'light',
+        marginBottom: '0'        
+    }
+})
+
+export const wrapper = css({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
-}
+})
 
-module.exports = {
-    searchContainer: searchContainer,
-    tile: tile,
-    wrapper: wrapper
-}
+export const imagesContainer = css({
+    width: '100%',
+    display: 'flex'
+})
+
+export const imageStyle = css({
+    width: '100%',
+    height: '60vh',
+})
+
+export const imageContainer = css({
+    width: '50%',
+    height: '60vh',
+    color: '#3E3B3B',
+    filter: 'grayscale(100%)',
+    transition: 'all 0.3s ease',
+    ':hover, :focus':{
+        color: 'white',
+        filter: 'none',
+        outline: 'none'
+    }
+})
+
+export const splashTitle = css({
+    position: 'relative',
+    top: -115, 
+    textAlign: 'left',
+    fontSize: '3rem',
+    marginLeft: '10px',
+    fontFamily: 'poppins'
+})

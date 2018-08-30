@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { getUserById } from '../../utils/api'
-import style from './ImageViewStyle'
-const { iconStyle, container, contentContainer, artistContainer } = style
+import { iconStyle, container, contentContainer, artistContainer } from './ImageViewStyle'
 
 
 class ImageView extends Component{
@@ -22,13 +21,13 @@ class ImageView extends Component{
     render(){
 
     return(
-            <div style={container}>
+            <div className={container}>
                 { 
                 this.state.artist ?
-                <div style={contentContainer} >
+                <div className={contentContainer} >
                     <img src={this.state.image.url} alt='image' height='500'/>
                     <p>{this.state.image.description}</p>
-                    <div style={artistContainer}>
+                    <div className={artistContainer}>
                         <p>By: <a href={`http://localhost:3000/#/profile/${this.state.artist.username}`} style={{textDecoration: 'none', color: 'black'}}>{this.state.artist.firstname} {this.state.artist.lastname}</a></p> 
                     </div>
                 </div>

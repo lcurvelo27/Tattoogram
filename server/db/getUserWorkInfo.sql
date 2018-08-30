@@ -1,4 +1,4 @@
-SELECT w.about FROM users as U 
+SELECT * FROM users as U 
 
 JOIN workInfo as w on U.id = w.artistid
 
