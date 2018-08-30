@@ -1,5 +1,9 @@
 import Axios from "../../node_modules/axios";
 
+export const getAllUsers = () => {
+    return Axios.get('http://localhost:3005/api/users').then(response => response.data)
+}
+
 const getUserInfo = (username) => {
     return Axios.get(`http://localhost:3005/api/user/${username}`).then(response => response.data)
 }

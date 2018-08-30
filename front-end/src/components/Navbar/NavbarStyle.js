@@ -1,40 +1,35 @@
 // Navbar
+import { css } from 'emotion'
 
-const container = {
+
+export const container = css({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     padding: '10px',
     boxSizing: 'border-box',
     fontFamily : 'Poppins'
-}
+})
 
-const buttonsContainer = {
+export const buttonsContainer = css({
     display: 'flex',
     width: '200px',
     justifyContent: 'space-around',
     textDecoration: 'none'
-}
+})
 
-const textDecoration = {
+export const textDecoration = css({
     textDecoration: 'none',
     color: 'black',
     ':hover': {
         textDecoration: 'underline'
     }
-}
+})
 
-const underline = {
+export const underline = css({
     textDecoration: 'none',
     color: 'black',
     ':hover': {
         textDecoration: 'underline'
     }
-}
-
-module.exports = {
-    underline: underline,
-    textDecoration: textDecoration,
-    container: container,
-    buttonsContainer: buttonsContainer
-}
+})

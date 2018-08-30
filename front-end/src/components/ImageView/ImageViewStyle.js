@@ -1,29 +1,26 @@
 // Image View Style
+import { css } from 'emotion'
 
-const contentContainer = {
+export const contentContainer = css({
     display: 'flex', 
     flexDirection: 'column', 
-    alignItems: 'center'
-}
+    alignItems: 'center',
+    fontFamily: 'poppins'
+})
 
-const container = {
+export const container = css({
     width: '50%', 
     padding: '30px', 
     backgroundColor: 'white', 
     margin: 'auto', 
     marginTop: '10px'
-}
+})
 
-const artistContainer = {
+export const artistContainer = css({
     display:'flex', 
     width: '50%', 
     justifyContent: 'space-around',
     fontFamily: 'poppins',
     letterSpacing: '2px'
-}
+})
 
-module.exports = {
-    contentContainer: contentContainer,
-    container: container,
-    artistContainer: artistContainer
-}

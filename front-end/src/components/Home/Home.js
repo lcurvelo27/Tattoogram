@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar'
-import style from './HomeStyle'
 import ImageView from '../ImageView/ImageView';
-import Radium from 'radium'
 import Modal from '@material-ui/core/Modal'
 import { homeImageGrid } from '../../utils/api'
-const { iconStyle, imageStyle, imageGridStyle } = style
+import { iconStyle, imageStyle, imageGridStyle } from './HomeStyle'
 
 class Home extends Component{
     constructor(props){
@@ -48,7 +46,7 @@ class Home extends Component{
         let imageGrid = this.state.images.map((image, i) =>{
             return(
                 <div key={i} style={{marginTop: i % 2 == 0 ? '50px' : '100px'}}>
-                    <img src={image.url} key={image.id} value={image.id} style={imageStyle} alt='image' height='300' onClick={() => this.selectImage(image)}/>
+                    <img src={image.url} key={image.id} value={image.id} className={imageStyle} alt='image' height='300' onClick={() => this.selectImage(image)}/>
                 </div>
             )
         })
@@ -56,7 +54,7 @@ class Home extends Component{
         return(
             <div>
                 <Navbar />
-                <div style={imageGridStyle}>
+                <div className={imageGridStyle}>
                     {imageGrid}
                     <Modal open={this.state.modal} disableAutoFocus={true} onBackdropClick={() => this.close()}>
                         <ImageView image={this.state.imageSelected}/> 
@@ -67,6 +65,5 @@ class Home extends Component{
     }
 }
 
-Home = Radium(Home)
 
 export default Home
