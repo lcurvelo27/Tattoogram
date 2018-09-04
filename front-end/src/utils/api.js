@@ -1,5 +1,9 @@
 import Axios from "../../node_modules/axios";
 
+export const getArtistsByRole = (role) => {
+    return Axios.get(`http://localhost:3005/api/artist?role=${role}`).then(response => response.data)
+} 
+
 export const getAllUsers = () => {
     return Axios.get('http://localhost:3005/api/users').then(response => response.data)
 }
