@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar';
 import { getArtistsByRole, getAllUsers } from '../../utils/api'
 import { Link } from 'react-router-dom'
-import { tileImagesStyle ,tileInfo, splashTitle, imageContainer, imagesContainer, imageStyle, searchContainer, tile, wrapper } from './SearchStyle'
+import { userTilesContainer, tileImagesStyle ,tileInfo, splashTitle, filterImagesContainer, filterSingleImageContainer, imageStyle, searchContainer, tile, wrapper } from './SearchStyle'
 
 const TileImages = (props) => {
     let images = props.images.splice(0, 6).map(image =>{
@@ -17,10 +17,14 @@ const TileImages = (props) => {
 
 const UserTiles = (props) => {
     let userTiles = props.users.map(user => {
+        console.log(user.url)
         return(
+            <div className={userTilesContainer}>
+            {
+            user.username && user.firstname ? 
             <Link to={`/profile/${user.username}`}>
                 <div className={tile} key={user.username}>
-                        <img src={ user.profilepicture ? user.profilepicture : require('../Images/default-user-image.png')} alt='user' height='70' width='70' style={{borderRadius: '100%'}}/>
+                    <img src={ user.profilepicture ? user.profilepicture : require('../Images/default-user-image.png')} alt='user' height='70' width='70' style={{borderRadius: '100%'}}/>
                     <div className={tileInfo}>
                         <h3 className='info'>{user.firstname} {user.lastname}</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu.</p>
@@ -30,6 +34,10 @@ const UserTiles = (props) => {
                     </div>
                 </div>
             </ Link>
+            :
+            null
+            }
+        </div>
         )})   
     return userTiles
 }
@@ -68,22 +76,23 @@ class Search extends Component{
         return(
             <div className={wrapper}>
                 <Navbar />
-                <div className={imagesContainer}>
-                    <div className={imageContainer} ref={this.tattoo} onClick={() => this.tattoo.current.focus()} tabIndex='0'>
+                <div className={filterImagesContainer}>
+                    <div className={filterSingleImageContainer} ref={this.tattoo} onClick={() => this.tattoo.current.focus()} tabIndex='0'>
                         <img src={require('../../utils/images/pexels-photo-1249214.jpeg')} className={imageStyle} alt="tattoo" onClick={() => this.filterArtistsByRole('tattoo')}/>
-                        <h3 className={splashTitle} >Tattoos</h3>
+                        <h3 className={splashTitle}> Tattoos </h3>
                     </div>
-                    <div className={imageContainer} ref={this.hairstyle} onClick={() => this.hairstyle.current.focus()} tabIndex='0' >
+                    <div className={filterSingleImageContainer} ref={this.hairstyle} onClick={() => this.hairstyle.current.focus()} tabIndex='0' >
                         <img src={require('../../utils/images/pexels-photo-995300.jpeg')} className={imageStyle} alt="tattoo" onClick={() => this.filterArtistsByRole('hairstyle')}/>
-                        <h3 className={splashTitle} onClick={() => this.filterArtistsByRole('hairstyle')}>HairStyle</h3>
+                        <h3 className={splashTitle} onClick={() => this.filterArtistsByRole('hairstyle')}> HairStyle </h3>
                     </div>                    
                 </div>
                 <div className={searchContainer}>
-                    {this.state.users ? 
+                    {
+                    this.state.users ? 
                     <UserTiles users={this.state.users} />
                     :
                     'loading'
-                }
+                    }
                 </div>
             </div>
         )

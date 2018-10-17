@@ -24,3 +24,9 @@ export const artistContainer = css({
     letterSpacing: '2px'
 })
 
+export const imageSize = css({
+    height: '500px',
+    '@media (max-width: 576px)': {
+        height: '300px'
+    }
+})

@@ -1,5 +1,12 @@
 import { css } from 'emotion'
 
+export const wrapper = css({
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+})
+
 export const searchContainer = css({
     display: 'flex',
     flexWrap: 'wrap',
@@ -10,6 +17,10 @@ export const searchContainer = css({
         textDecoration: 'none',
         color: 'black'
     }
+})
+
+export const userTilesContainer = css({
+    width: '100%'
 })
 
 export const tile = css({
@@ -33,7 +44,7 @@ export const tileImagesStyle = css({
 export const tileInfo = css({
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    width: '300px',
     textAlign: 'left',
     marginLeft: '10px',
     fontFamily: 'poppins',
@@ -48,14 +59,7 @@ export const tileInfo = css({
     }
 })
 
-export const wrapper = css({
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-})
-
-export const imagesContainer = css({
+export const filterImagesContainer = css({
     width: '100%',
     display: 'flex'
 })
@@ -65,7 +69,7 @@ export const imageStyle = css({
     height: '60vh',
 })
 
-export const imageContainer = css({
+export const filterSingleImageContainer = css({
     width: '50%',
     height: '60vh',
     color: '#3E3B3B',

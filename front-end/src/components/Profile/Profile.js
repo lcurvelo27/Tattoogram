@@ -28,7 +28,7 @@ class Profile extends Component {
     componentDidMount() {
         let username = this.props.match.params.username
         getUserAll(username).then(response => {
-            let locationUri = encodeURI(response.work[0].location)
+            let locationUri = response.work[0] ? encodeURI(response.work[0].location) : ''
             let galleryImages = response.images.map(image => {
                 return {
                         src: image.url,
@@ -94,23 +94,29 @@ class Profile extends Component {
                             </div>
                     </div>
                         <div className={contentContainer}>
-                                <Element name='portfolio'>
-                                    <h2>Portfolio</h2>  
-                                </Element>
-                                <div className={imageGrid}>                                    
-                                    <Gallery images={this.state.gallery} backdropClosesModal={true} rowHeight={300}/>
-                                </div> 
-                                <Element name='about' className={{marginTop: '100px'}}>
-                                    <h2>About</h2>
-                                    <p>{this.state.workInfo.about}</p>
-                                </Element>
-                                <Element name='contact' className={{marginTop: '100px'}}>
-                                    <h2>Contact Info</h2>
-                                    <p>Email Address: {this.state.workInfo.email}</p>
-                                    <p>Phone Number: +1 {this.state.workInfo.phonenumber}</p>
-                                    <p>Address: {this.state.workInfo.location}</p>
-                                    <img src={`https://maps.googleapis.com/maps/api/staticmap?markers=size:mid|${this.state.location}&zoom=15&size=300x300&key=AIzaSyCSLFENvVixOGW_2gx7JyWKdOKf2ToBxhw`} alt=""/>
-                                </Element>
+                                { this.state.workInfo ? 
+                                <div>
+                                    <Element name='portfolio'>
+                                        <h2>Portfolio</h2>  
+                                    </Element>
+                                    <div className={imageGrid}>                                    
+                                        <Gallery images={this.state.gallery} backdropClosesModal={true} rowHeight={300}/>
+                                    </div> 
+                                    <Element name='about' className={{marginTop: '100px'}}>
+                                        <h2>About</h2>
+                                        <p>{this.state.workInfo.about}</p>
+                                    </Element>
+                                    <Element name='contact' className={{marginTop: '100px'}}>
+                                        <h2>Contact Info</h2>
+                                        <p>Email Address: {this.state.workInfo.email}</p>
+                                        <p>Phone Number: +1 {this.state.workInfo.phonenumber}</p>
+                                        <p>Address: {this.state.workInfo.location}</p>
+                                        <img src={`https://maps.googleapis.com/maps/api/staticmap?markers=size:mid|${this.state.location}&zoom=15&size=300x300&key=AIzaSyCSLFENvVixOGW_2gx7JyWKdOKf2ToBxhw`} alt=""/>
+                                    </Element>
+                                </div>
+                                    :
+                                    <h3>Oops... It seems like the artist hasn't uploaded any content as of today. Check back tomorrow!</h3>
+                                }
                         </div>
                     </div>
                 :

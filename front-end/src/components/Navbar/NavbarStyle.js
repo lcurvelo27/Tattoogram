@@ -5,7 +5,7 @@ import { css } from 'emotion'
 export const container = css({
     width: '100%',
     position: 'sticky',
-    marginBottom:'100px',
+    marginBottom:'30px',
     backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'space-between',
@@ -13,6 +13,7 @@ export const container = css({
     boxSizing: 'border-box',
     fontFamily : 'Poppins',
     'z-index': 1,
+    height: '100px',
     top: 0
 })
 
@@ -21,16 +22,22 @@ export const buttonsContainer = css({
     width: '200px',
     justifyContent: 'space-around',
     textDecoration: 'none',
-    fontSize: '2rem'
+    fontSize: '2rem',
+    '@media (max-width: 576px)': {
+        width: '100px'
+    }
 })
 
 export const textDecoration = css({
     textDecoration: 'none',
-    color: 'black',
-    ':hover': {
-        textDecoration: 'underline'
-    },
-    
+    color: 'black'
+})
+
+export const logoContainer = css({
+    fontSize: '2rem',
+    '@media (max-width: 576px)': {
+        marginLeft: '15px'
+    }
 })
 
 export const underline = css({

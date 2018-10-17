@@ -2,6 +2,7 @@
 
 import { css } from 'emotion'
 
+
 export const imageGridStyle = css({
     display: 'flex',
     width: '100%',
@@ -11,6 +12,7 @@ export const imageGridStyle = css({
 })
 
 export const imageStyle = css({
+    height: '300', 
     borderRadius: '10%',
     marginLeft: '5px',
     marginRight: '5px',
@@ -20,6 +22,9 @@ export const imageStyle = css({
     ':hover': {
         boxShadow: '0.5px 0.5px 0.5px 0.5px #74735E',
         top: '-2px'
+    },
+    '@media (max-width: 576px)': {
+        height: '150'
     }
 })
 
