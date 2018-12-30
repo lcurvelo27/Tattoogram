@@ -1,117 +1,80 @@
-import React, { Component } from 'react'
-import Navbar from '../Navbar/Navbar'
-import ImageView from '../ImageView/ImageView';
-import Modal from '@material-ui/core/Modal'
-import MediaQuery from 'react-responsive'
-import { homeImageGrid, loadContent } from '../../utils/api'
-import { iconStyle, imageStyle, imageGridStyle } from './HomeStyle'
-let newPosts = loadContent()
+import React, { Component } from 'react';
+import { getHomePageInfo, getUserImagesByID } from '../../utils/api';
+import { imageStyling, portfolioShowcase, splash, splashContainer, featuredArtistContainer, featuredArtistInfoContainer, title } from './HomeStyle';
+import Navbar from '../Navbar/Navbar';
 
 
-const ImageGrid = (props) => {
-    var grid = props.images.map((image, i) =>{
-        return(
-            <div key={i} style={{marginTop: i % 2 == 0 ? '50px' : '100px'}}>
-                <img src={image.url} key={image.id} value={image.id} className={imageStyle} alt='image' onClick={() => props.selectImage(image)}/>
+function FeaturedArtistInfo(props){
+    const { firstname, lastname, about, profilepicture } = props.featuredArtist
+    return(
+        <div className = { featuredArtistContainer }>
+            <img src = { profilepicture } alt="" className={imageStyling}/>
+            <div className = { featuredArtistInfoContainer }>
+                <h2>{ firstname } { lastname }</h2>
+                <h3>Bio:</h3>
+                <p>{ about }</p>
             </div>
-            )
-        })
-
-
-
-    return grid
+        </div>
+    )
 }
 
-const MobileGrid = (props) => {
-     return props.images.map(image => {
-        return(
+function PortfolioByFeaturedArtist(props){
+    console.log(props.images.length)
+    return props.images.splice(0, 3).map(image => {
+        return (
             <div>
-                <ImageView image={image} />
-            </div> 
-        )
-})}
-
+                <img src={image.url} style = {{width: '300px', maxHeight: '350px'}}/>
+            </div>
+            )
+        }
+    )
+}
 
 class Home extends Component{
     constructor(props){
         super (props)
 
             this.state = {
-                images: [],
-                imageSelected: null,
-                modal: false,
+                featuredArtist: [],
+                imagesLoading: true,
                 loading: true
             }  
-
-            window.onscroll = () => {      
-                // Checks that the page has scrolled to the bottom
-                if (
-                window.innerHeight + document.documentElement.scrollTop
-                === document.documentElement.offsetHeight
-                ) {
-                    console.log(this)
-                    setTimeout(this.loadPosts, 3000)
-                }
-            };
         }
         
-    componentDidMount() {
-        newPosts().then(response => {
-            let newState; 
-            newState = response
-            this.setState({
-                images: newState,
-                loading: false
-            })
-        })
-    }
+        componentWillMount(){
+            getHomePageInfo().then( response => {
+                const newState = response[0]
+                this.setState({
+                    featuredArtist: newState,
+                    loading: false
+                })
+            })            
+        }
 
-    loadPosts = () => {
-        return newPosts().then(response => {
-            let newScrollState;
-            newScrollState = response
-            this.setState({
-                images: newScrollState
-            })
-        })
-    }
+    render(){    
+        const { loading, featuredArtist } = this.state    
 
-    selectImage = (image) => {
-        this.setState({
-            imageSelected: image,
-            modal: true
-        },() => console.log('image selected', this.state.imageSelected))
-    }
-
-    close() {
-        this.setState(currentState => {
-            return {
-                imageSelected: null,
-                modal: !currentState.modal
-            }
-        })
-    }
-
-    render(){        
-        
         return(
             <div>
                 <Navbar />
-                    { !this.state.loading ? 
-                        <div className={imageGridStyle}>
-                            <MediaQuery query='(max-width: 576px)'>
-                                <MobileGrid images={this.state.images}/>
-                            </MediaQuery>
-                            <MediaQuery query='(min-width: 576px)'>
-                                <ImageGrid images={this.state.images} selectImage={this.selectImage}/>
-                            </MediaQuery>
+                <div style = {{width: '80%', margin: 'auto'}}>
+                    <div className = { splashContainer }>
+                        <h1 className = { splash }>Tattoogram</h1>
+                    </div>
+                    {
+                        !loading ? 
+                        <div>
+                            <h1 className = { title }>Featured Artist</h1>
+                            <FeaturedArtistInfo featuredArtist = { featuredArtist }/>
+                            <h1 className = { title }>Work by { featuredArtist.firstname }</h1>
+                            <div className = { portfolioShowcase }>
+                                <PortfolioByFeaturedArtist images = { featuredArtist.images } />
+                            </div>
                         </div>
                         :
-                        'loading'
+                        <p>loading</p>
                     }
-                    <Modal open={this.state.modal} disableAutoFocus={true} onBackdropClick={() => this.close()}>
-                        <ImageView image={this.state.imageSelected}/> 
-                    </Modal>
+                </div>
             </div>
         )
     }

@@ -1,48 +1,50 @@
 import Axios from "../../node_modules/axios";
 
+export const getHomePageInfo = () => {
+    return Axios.get('https://partner.tattoogrm.com/api/getHomePageInfo', {withCredentials: true}).then(response => response.data)
+}
+
 export const getArtistsByRole = (role) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/artist?role=${role}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/artist?role=${role}`, {withCredentials: true}).then(response => response.data)
 } 
 
 export const getAllUsers = () => {
-    return Axios.get('http://partner.tattoogrm.com/api/users').then(response => response.data)
+    return Axios.get('https://partner.tattoogrm.com/api/users', {withCredentials: true}).then(response => response.data)
 }
 
 const getUserInfo = (username) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/user/${username}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/user/${username}`, {withCredentials: true}).then(response => response.data)
 }
 
 const getUserImages = (username) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/images/${username}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/images/${username}`, {withCredentials: true}).then(response => response.data)
 }
 
-const getUserImagesByID = (id) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/getImagesById/${id}`).then(response => response.data)
+export const getUserImagesByID = (id) => {
+    return Axios.get(`https://partner.tattoogrm.com/api/getImagesById/${id}`, {withCredentials: true}).then(response => response.data)
 }
 
 const getUserWorkInfo = (username) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/work/${username}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/work/${username}`, {withCredentials: true}).then(response => response.data)
 }
 const getWorkInfoByID = (id) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/workInfo/${id}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/workInfo/${id}`, {withCredentials: true}).then(response => response.data)
 }
 
 export const getUserById = (id) => {
-    return Axios.get(`http://partner.tattoogrm.com/api/getUserById/${id}`).then(response => response.data)
+    return Axios.get(`https://partner.tattoogrm.com/api/getUserById/${id}`, {withCredentials: true}).then(response => response.data)
 }
 
 export const homeImageGrid = () => {
-    return Axios.get('http://partner.tattoogrm.com/api/images').then(response => response.data)
+    return Axios.get('https://partner.tattoogrm.com/api/images', {withCredentials: true}).then(response => response.data)
 }
 export const loadContent = () => {
     let loads = 0
     var result = []
     function fetchData(){
-        return Axios.get(`http://partner.tattoogrm.com/api/postsload?load=${loads}`).then(response => {
-            console.log('response.data', response.data)
+        return Axios.get(`https://partner.tattoogrm.com/api/postsload?load=${loads}`, {withCredentials: true}).then(response => {
             result = [...result, ...response.data]
             loads += 20
-            console.log('newResult', result)
             return result
         })
     }
