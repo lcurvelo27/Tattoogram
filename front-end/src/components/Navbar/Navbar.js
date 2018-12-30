@@ -12,14 +12,16 @@ let Navbar = () => {
                     <Link to='/' className={textDecoration} key='home'><i className="far fa-newspaper"></i></Link>
                 </MediaQuery>
                 <MediaQuery query='(min-width: 576px)'>
-                    <Link to='/' className={textDecoration} key='home'><p key='1'><i className="far fa-newspaper"></i>TattooGram</p></Link>
+                    <Link to='/' className={textDecoration} key='home'><p key='1' style={{margin: 0}}><i className="far fa-newspaper"></i>TattooGram</p></Link>
                 </MediaQuery>
             </div>
             <div className={ buttonsContainer }>
                 <MediaQuery query='(max-width: 576px)'>
+                    <Link to='/tattoos' key='tattoos'><p>Tattoos</p></Link>
                     <Link to='/search' key='search'><i className="fas fa-search"></i></Link>
                 </MediaQuery> 
                 <MediaQuery query='(min-width: 576px)'>
+                    <Link to='/tattoos' key='tattoos' className={textDecoration}><p className={underline}>Tattoos</p></Link>
                     <Link to='/search' className={textDecoration} key='search'><p className={underline} key='2'>Search</p></Link>
                 </MediaQuery>
             </div>

@@ -17,7 +17,6 @@ const TileImages = (props) => {
 
 const UserTiles = (props) => {
     let userTiles = props.users.map(user => {
-        console.log(user.url)
         return(
             <div className={userTilesContainer}>
             {
@@ -68,7 +67,7 @@ class Search extends Component{
             let newState = response
             this.setState({
                 users: newState
-            })
+            }, console.log(this.state))
         })
     }
 

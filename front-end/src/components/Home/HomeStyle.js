@@ -2,34 +2,51 @@
 
 import { css } from 'emotion'
 
+export const imageStyling = css({
+    width: '50%',
+    maxHeight: '500px'
+})
 
-export const imageGridStyle = css({
+export const portfolioShowcase = css({
+    margin: 'auto',
     display: 'flex',
-    width: '100%',
-    justifyContent: 'space-around',
-    flexWrap: 'wrap',
-    backgroundColor: '#F7F7F7'
+    justifyContent: 'space-between',
+    alignItems: 'center'
 })
 
-export const imageStyle = css({
-    height: '300', 
-    borderRadius: '10%',
-    marginLeft: '5px',
-    marginRight: '5px',
-    position: 'relative',
-    top: 0,
-    transition: 'top ease 0.2s',
-    ':hover': {
-        boxShadow: '0.5px 0.5px 0.5px 0.5px #74735E',
-        top: '-2px'
-    },
-    '@media (max-width: 576px)': {
-        height: '150'
-    }
+export const splashContainer = css({
+    height: '70vh',
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center'
 })
 
-export const iconStyle = css({
-    position: 'relative', 
-    left: '50%', 
-    fontSize: '1.5rem'
+export const splash = css({
+    fontFamily: 'Major Mono Display',
+    fontSize: '100px',
+    borderBottom: '10px solid black'
+})
+
+export const featuredArtistContainer = css({
+    display: 'flex', 
+    marginBottom: '150px',
+    margin: 'auto',
+    justifyContent: 'space-between'
+})
+
+export const featuredArtistInfoContainer = css({
+    width: '50%',
+    boxSizing: 'border-box',
+    display: 'flex', 
+    flexDirection: 'column', 
+    fontFamily: 'Poppins',
+    padding: '55px',
+    textAlign: 'left'
+})
+
+export const title = css({
+    fontFamily: 'Poppins',
+    fontSize: '3rem',
+    textAlign: 'left',
+    fontWeight: '100'
 })
